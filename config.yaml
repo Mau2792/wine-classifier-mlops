@@ -1,0 +1,14 @@
+# Data files paths
+raw_data_path: "data/raw/raw_data.csv"
+processed_data_path: "data/processed/processed_data.csv"
+
+# Saved model path
+saved_model_path: "model/random_forest.joblib"
+
+# Model configuration parameters
+max_depth: 5
+n_estimators: 100
+
+# Training/test split configuration
+test_size: 0.2
+random_state: 42
