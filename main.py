@@ -1,6 +1,7 @@
 from src.config_loader import load_config
 from src.data_preprocessing import load_data, split_data
 from src.model_training import train_model
+from src.evaluation import evaluate_model
 import pandas as pd
 
 def main():
@@ -17,7 +18,8 @@ def main():
     X_train, X_test, y_train, y_test = split_data(
         df,
         test_size=config['test_size'],
-        random_state=config['random_state']
+        random_state=config['random_state'],
+        processed_path=config['processed_data_path']
     )
 
     # Initializing and training the model (Random Forest CLassifier)
@@ -29,5 +31,17 @@ def main():
         max_depth=config['max_depth'],
         random_state=config['random_state']
     )
-    
+
+    # Evaluating the model
+    report = evaluate_model(
+        model,
+        X_test,
+        y_test
+    )
+
+
+
+if __name__ == "__main__":
+    main()
+
     

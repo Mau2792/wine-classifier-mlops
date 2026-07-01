@@ -13,13 +13,16 @@ def load_data(data_path: str) -> pd.DataFrame:
     print("Loading raw data...")
 
     # Loading raw data
-    data = load_wine().data
+    wine_dataset = load_wine()
+    data = wine_dataset.data
+
+    print(f"TARGET NAMES: {wine_dataset.target_names}")
     # Saving feature names to name the columns of our DataFrame
-    feature_names = load_wine().feature_names
+    feature_names = wine_dataset.feature_names
     # Creating pandas DataFrame
     df = pd.DataFrame(data, columns=feature_names)
     # Adding result column
-    results = load_wine().target
+    results = wine_dataset.target
     df['target'] = results
 
     # Creating the directory to save raw data if it doesn't exist already
@@ -32,7 +35,7 @@ def load_data(data_path: str) -> pd.DataFrame:
     
     return df
 
-def split_data(df: pd.DataFrame, test_size: float, random_state: int) -> Tuple[pd.Dataframe, pd.DataFrame, pd.Series, pd.Series]:
+def split_data(df: pd.DataFrame, test_size: float, random_state: int,  processed_path: str) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     """
     Splits the DataFrame in training and test sets, with their respective target results.
     Returns X_train, X_test, y_train, y_test
@@ -54,6 +57,11 @@ def split_data(df: pd.DataFrame, test_size: float, random_state: int) -> Tuple[p
     print("Training and test sets splitted")
     print(f"Training set size: {X_train.shape[0]}")
     print(f"Test set size: {y_test.shape[0]}")
+
+    # Saving training dataset in the apposite directory
+    os.makedirs(os.path.dirname(processed_path), exist_ok=True)
+    X_train.to_csv(f"{processed_path}", index=False)
+
 
     return X_train, X_test, y_train, y_test
     
