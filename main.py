@@ -1,5 +1,6 @@
 from src.config_loader import load_config
 from src.data_preprocessing import load_data, split_data
+from src.model_training import train_model
 import pandas as pd
 
 def main():
@@ -18,4 +19,15 @@ def main():
         test_size=config['test_size'],
         random_state=config['random_state']
     )
+
+    # Initializing and training the model (Random Forest CLassifier)
+    model = train_model(
+        X_train=X_train,
+        y_train=y_train,
+        df=df,
+        n_estimators=config['n_estimators'],
+        max_depth=config['max_depth'],
+        random_state=config['random_state']
+    )
+    
     
