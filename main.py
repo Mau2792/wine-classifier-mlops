@@ -2,6 +2,7 @@ from src.config_loader import load_config
 from src.data_preprocessing import load_data, split_data
 from src.model_training import train_model
 from src.evaluation import evaluate_model
+from src.model_io import save_model
 import pandas as pd
 
 def main():
@@ -39,6 +40,8 @@ def main():
         y_test
     )
 
+    # Saving the trained model
+    save_model(model,config['saved_model_path'])
 
 
 if __name__ == "__main__":
