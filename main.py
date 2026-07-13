@@ -27,9 +27,6 @@ def main():
     model = train_model(
         X_train=X_train,
         y_train=y_train,
-        df=df,
-        n_estimators=config['n_estimators'],
-        max_depth=config['max_depth'],
         random_state=config['random_state']
     )
 
